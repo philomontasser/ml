@@ -28,7 +28,7 @@ playlists = []
 
 for playlist in playlists_file:
     if playlist:
-        playlists.append(playlist)
+        playlists.append(playlist.strip())
     else:
         playlists_file.close()
 
