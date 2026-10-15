@@ -99,3 +99,5 @@ songs_list = list(songs_set)
 for song in songs_list:
 
     songs_file.write(song + "\n")
+
+songs_file.close()
