@@ -1,4 +1,6 @@
 import http.client
+import json
+import pandas
 
 
 
@@ -60,7 +62,15 @@ for track in tracks_features_set:
 
 
 
+rows = []
 
+for line in open("features.txt"):
+
+    if line.strip():
+        
+        rows += json.loads(line)["content"]
+
+pandas.DataFrame(rows).to_csv("features.csv", index=False)
 
 
 
