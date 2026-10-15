@@ -1,7 +1,6 @@
 import spotipy
 import dotenv
 import os
-import http.client
 
 
 
@@ -16,9 +15,11 @@ REDIRECT_URI = "http://127.0.0.1:8888/callback"
 
 
 spotify_client = spotipy.Spotify(
+
     auth_manager=spotipy.oauth2.SpotifyOAuth(
 
         client_id=SPOTIFY_CLIENT_ID,
+
         client_secret=SPOTIFY_CLIENT_SECRET,
 
         redirect_uri=REDIRECT_URI,
@@ -52,13 +53,20 @@ results = []
 
 for playlist in playlists:
 
-    results.append(spotify_client.playlist_items(playlist, additional_types=["track"]))
+    if playlist:
+
+        results.append(spotify_client.playlist_items(playlist, additional_types=["track"]))
+
+    else:
+
+        playlists_file.close
 
 
 
 songs_set = set()
 
 for result in results:
+    9
     while result:
 
         items = result["items"]
@@ -88,16 +96,13 @@ for result in results:
 
 
 
-playlists_file.close()
-
-
-
 songs_file = open("songs.txt", "w")
 
 songs_list = list(songs_set)
 
 for song in songs_list:
 
-    songs_file.write(song + "\n")
-
-songs_file.close()
+    if song:
+        songs_file.write(song + "\n")
+    else:
+        songs_file.close()
